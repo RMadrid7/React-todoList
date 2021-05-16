@@ -1,1 +1,0 @@
-//还不清楚如何把mapDispatchToProps中的内容导到这里是否合适
