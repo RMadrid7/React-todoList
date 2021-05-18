@@ -1,17 +1,16 @@
 import Item from './Item';
-
-
 const List = ({listData,deleteData}) =>{
-    return <div className='List'>
-        {
-            listData.map((item) => {
-                const {note,date,time,id} = item;
-                return <Item key ={id} id={id} note={note} date={date} time={time} deleteData = {deleteData} />
+    console.log(listData);
+    return (
+        <div>
+            {listData.map((item)=>{
+                const {id,date,time,input} = item;
+                return (
+                    <Item note={input} date={date} time={time} key={id} id={id} deleteData={deleteData}/>
+                )})}
 
-            })
-        }
-    </div>
-
+        </div>
+    )
 }
 
 export default List;

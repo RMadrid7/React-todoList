@@ -1,49 +1,40 @@
 import {useState} from 'react';
-import {v4} from 'uuid';
+import { v4 } from 'uuid';
+
 const Edit = ({add}) =>{
-
-
-    const[note,setNote] = useState("");
-    const[date,setDate] = useState("");
-    const[time,setTime] = useState("");
-
-    function addItem() {
-        add(function (prevData){
-            return [
-                    {
-                        id:v4(),
-                        note,
-                        date,
-                        time
-                    },
-                    ...prevData,
-                ]
-            }
-        )
+    const [input,setInput] = useState("");
+    const inputChange = (e) =>{
+        return setInput(e.target.value)
     }
-
-    function noteChange(e){
-        setNote(e.target.value);
+    const [time,setTime] = useState("");
+    const timeChange = (e) =>{
+        return setTime(e.target.value)
     }
-    function dateChange(e){
-        setDate(e.target.value);
+    const [date,setDate] = useState("");
+    const dateChange = (e) =>{
+        return setDate(e.target.value)
     }
-    function timeChange(e){
-        setTime(e.target.value);
+    const addItem = () =>{
+        return add((prev)=>{
+            return [...prev,{
+                id:v4(),
+                input,
+                time,
+                date
+            }]
+        })
     }
-
-    return <div>
-        <h1>备忘录</h1>
-        <p>记事：</p>
-        <input type='text' value={note} onChange={noteChange}/>
-        <p>日期:</p>
-        <input type='date' value={date} onChange={dateChange}/>
-        <p>时间:</p>
-        <input type='time' value={time} onChange={timeChange}/>
-        <button className='add' onClick={addItem}>新增</button>
-        
-    </div>
-
+    return (
+        <div>
+            <p>Content</p>
+            <input type="text" value={input} onChange={inputChange}/>
+            <p>Time</p>
+            <input type="time" value={time} onChange={timeChange}/>
+            <p>Date</p>
+            <input type="date" value={date} onChange={dateChange}/>
+            <button onClick={addItem}>Submit</button>
+        </div>
+    )
 }
 
 export default Edit;
